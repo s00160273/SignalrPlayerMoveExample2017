@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Engine.Engines;
 using Sprites;
 using System.Collections.Generic;
+using GameComponentNS;
 
 namespace MonoGameClient
 {
@@ -19,6 +20,7 @@ namespace MonoGameClient
         SpriteBatch spriteBatch;
         SpriteFont font;
         string connectionMessage = string.Empty;
+        FadeTextManager FadeManager;
 
         // SignalR Client object delarations
 
@@ -63,6 +65,9 @@ namespace MonoGameClient
             // Add the proxy client as a Game service o components can send messages 
             Services.AddService<IHubProxy>(proxy);
 
+            FadeManager = new FadeTextManager(this);
+            
+            
             base.Initialize();
         }
 
@@ -94,6 +99,7 @@ namespace MonoGameClient
                 new OtherPlayerSprite(this, player, Content.Load<Texture2D>(player.imageName),
                                         new Point(player.playerPosition.X, player.playerPosition.Y));
                 connectionMessage = player.playerID + " delivered ";
+
             }
         }
 
@@ -160,7 +166,9 @@ namespace MonoGameClient
             // Create an other player sprites in this client afte
             new SimplePlayerSprite(this, player, Content.Load<Texture2D>(player.imageName),
                                     new Point(player.playerPosition.X, player.playerPosition.Y));
-            connectionMessage = player.playerID + " created ";
+            //connectionMessage = player.playerID + " created ";
+            new FadeText(this, new Vector2(10, 20), string.Format("Player with ID {0} has joined the game.", player.playerID));
+            
         }
 
         /// <summary>
@@ -173,6 +181,8 @@ namespace MonoGameClient
             Services.AddService<SpriteBatch>(spriteBatch);
 
             font = Content.Load<SpriteFont>("Message");
+
+            Services.AddService<SpriteFont>(font);
             
         }
 
@@ -208,6 +218,8 @@ namespace MonoGameClient
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
+            //new FadeText(this, new Vector2(10, 10), connectionMessage);
             spriteBatch.DrawString(font, connectionMessage, new Vector2(10, 10), Color.White);
             // TODO: Add your drawing code here
             spriteBatch.End();
