@@ -46,8 +46,10 @@ namespace MonoGameClient
             // create input engine
             new InputEngine(this);
 
-            // TODO: Add your initialization logic here change local host to newly created local host
-            serverConnection = new HubConnection("http://localhost:53922/");
+            // TODO: Add your initialization logic here change local host to newly created local host 
+            //http://s00160273-signalrtest.azurewebsites.net/
+            //serverConnection = new HubConnection("http://localhost:53922/");
+            serverConnection = new HubConnection("http://s00160273-signalrtest.azurewebsites.net/");
             serverConnection.StateChanged += ServerConnection_StateChanged;
             proxy = serverConnection.CreateHubProxy("GameHub");
             serverConnection.Start();

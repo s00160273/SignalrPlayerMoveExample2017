@@ -131,6 +131,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\s00160273-SignalRTest - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\s00160273-SignalRTest - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\SignalrGameServer20171123102038.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
@@ -183,8 +185,7 @@
           <IISUrl>http://localhost:53922/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://s00160273-signalrtest.azurewebsites.net/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
